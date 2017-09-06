@@ -1,0 +1,31 @@
+{
+  "name": "vue-test",
+  "version": "1.0.0",
+  "description": "vue-test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p",
+    "watch": "webpack --progress --watch",
+    "start": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FRANKIETANG/vue-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FRANKIETANG/vue-test/issues"
+  },
+  "homepage": "https://github.com/FRANKIETANG/vue-test#readme",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "vue": "^2.4.2",
+    "webpack-dev-server": "^2.7.1"
+  }
+}

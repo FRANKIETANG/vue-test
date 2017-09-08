@@ -1,25 +1,64 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Vue-Demo</title>
-    <meta charset="utf-8">  
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-TodoList</title>
+</head>
+<body>
     <div id="app">
-        <div class="newTask">
-          <input type="text" v-model="newTodo" @keypress.enter="addTodo">
-        </div>
-        <ol class="todos">
-          <li v-for="todo in todoList">
-            <input type="checkbox" v-model="todo.done">{{ todo.title }}
-            
-            <span v-if="todo.done">已完成</span>
-            <span v-else>未完成</span>
+        <section id="logInAndSignUp" v-if="!currentUser">
+            <div>
+                <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
+                <label><input type="radio" name="type" v-model="actionType" value="logIn">登录</label>
+            </div>
+            <div class="signUp" v-if="actionType === 'signUp'">
+                <form @submit.prevent="signUp">
+                    <div class="formRow">
+                        <input type="text" v-model="formData.username" placeholder="用户名">   
+                    </div>
+                    <div class="formRow">
+                        <input type="password" v-model="formData.password" placeholder="密码">   
+                    </div>
+                    <div class="formAction">
+                        <input type="submit" value="注册">
+                    </div>                    
+                </form>
+            </div>
+            <div class="logIn" v-if="actionType === 'logIn'">
+                <form @submit.prevent="logIn">
+                    <div class="formRow">
+                        <input type="text" v-model="formData.username" placeholder="用户名">   
+                    </div>
+                    <div class="formRow">
+                        <input type="password" v-model="formData.password" placeholder="密码">   
+                    </div>
+                    <div class="formAction">
+                        <input type="submit" value="登入">
+                    </div>                    
+                </form>
+            </div>
+        </section>
 
-            <button @click="removeTodo(todo)">X</button>
-          </li>
-        </ol>
-    </div>      
+        <section id="rodo" v-if="currentUser">
+            <p><button @click="logout">登出</button></p>
+            <div class="newTask">
+                <input type="text" v-model="newTodo" @keypress.enter="addTodo">
+            </div>
+            <ol class="todos">
+                <li v-for="todo in todoList">
+                    <input type="checkbox" v-model="todo.done"> {{ todo.title }}
+
+                    <span v-if="todo.done">已完成</span>
+                    <span v-else>未完成</span>
+
+                    <button @click="removeTodo(todo)">X</button>
+                </li>
+            </ol>
+        </section>
+    </div>
+
     <script src="bundle.js"></script>
-  </body>
+</body>
 </html>

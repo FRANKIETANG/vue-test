@@ -288,11 +288,21 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
     created: function() {
         window.onbeforeunload = () =>{
             let dataString = JSON.stringify(this.todoList)
-            window.localStorage.setItem('myTodos', dataString)
+
+            var AVTodos = __WEBPACK_IMPORTED_MODULE_1_leancloud_storage___default.a.Object.extend('AllTodos')
+            var avTodos = new AVTodos()
+            avTodos.set('content', dataString)
+            avTodos.save().then(function (todo) {
+                console.log("保存成功")
+            }, function (error) {
+                console.error("保存失败")
+            })
+
         }
-        let oldDataString = window.localStorage.getItem('myTodos')
-        let oldData = JSON.parse(oldDataString)
-        this.todoList = oldData || []
+        
+        // let oldDataString = window.localStorage.getItem('myTodos')
+        // let oldData = JSON.parse(oldDataString)
+        // this.todoList = oldData || []
 
         this.currentUser = this.getCurrentUser()
 
